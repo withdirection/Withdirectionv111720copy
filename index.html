@@ -1,16 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WITHdirection | Deaf-Led Sign Language Interpreting and Consulting</title>
+    <meta name="description" content="WITHdirection is a Deaf-led sign language interpreting and consulting firm based in Brooklyn, NY. Expert ASL interpretation, accessibility consulting, and training." />
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>WITHdirection v111720 (Copy)</title>
-      <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
-    </head>
+    <!-- Cookie Consent Management — blocks GA & MailerLite until user opts in -->
+    <script>
+      (function(){
+        var CONSENT_KEY = 'wd_cookie_consent';
+        var stored = null;
+        try { stored = localStorage.getItem(CONSENT_KEY); } catch(e){}
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+        window.__wdConsent = {
+          analytics: stored === 'accepted',
+          marketing: stored === 'accepted',
+          accept: function(){
+            try { localStorage.setItem(CONSENT_KEY, 'accepted'); } catch(e){}
+            window.__wdConsent.analytics = true;
+            window.__wdConsent.marketing = true;
+            window.__wdConsent.loadTracking();
+            var banner = document.getElementById('wd-cookie-banner');
+            if(banner) banner.style.display = 'none';
+          },
+          decline: function(){
+            try { localStorage.setItem(CONSENT_KEY, 'declined'); } catch(e){}
+            window.__wdConsent.analytics = false;
+            window.__wdConsent.marketing = false;
+            var banner = document.getElementById('wd-cookie-banner');
+            if(banner) banner.style.display = 'none';
+          },
+          loadTracking: function(){
+            if(!window.__wdConsent.analytics) return;
+            // Load Google Analytics
+            if(!document.getElementById('ga-script')){
+              var gs = document.createElement('script');
+              gs.id = 'ga-script';
+              gs.async = true;
+              gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-E8DW0N1C65';
+              document.head.appendChild(gs);
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
+              gtag('js', new Date());
+              gtag('config', 'G-E8DW0N1C65', { anonymize_ip: true });
+            }
+            // Load MailerLite
+            if(!window.__mlLoaded){
+              window.__mlLoaded = true;
+              (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+              .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+              n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+              (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+              ml('account', '1917077');
+              // Trigger popup for first-time consent (page load event already passed)
+              if(!stored){
+                setTimeout(function(){ if(window.ml) ml('show', '9zYRLy', true); }, 2500);
+              }
+            }
+          }
+        };
+
+        // If already accepted, load immediately
+        if(stored === 'accepted'){
+          window.__wdConsent.loadTracking();
+        }
+      })();
+    </script>
+
+    <!-- Tally embed script for dynamic iframe height -->
+    <script src="https://tally.so/widgets/embed.js" async></script>
+
+    <style>html, body { height: 100%; margin: 0; } #root { min-height: 100%; }</style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- GDPR Cookie Consent Banner -->
+    <div id="wd-cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#14213D;border-top:1px solid rgba(0,169,224,0.3);padding:16px 24px;font-family:'Fira Sans',sans-serif;">
+      <div style="max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
+        <p style="color:#E6E9EF;font-size:14px;margin:0;flex:1;min-width:240px;line-height:1.5;">
+          We use cookies for analytics and to improve your experience. By accepting, you consent to our use of cookies as described in our <a href="/privacy" style="color:#00A9E0;text-decoration:underline;">Privacy Policy</a>.
+        </p>
+        <div style="display:flex;gap:8px;flex-shrink:0;">
+          <button onclick="window.__wdConsent.decline()" style="background:transparent;border:1px solid #E6E9EF;color:#E6E9EF;padding:8px 20px;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;">Decline</button>
+          <button onclick="window.__wdConsent.accept()" style="background:linear-gradient(135deg,#00A9E0,#0090c0);border:none;color:white;padding:8px 20px;border-radius:8px;font-size:14px;cursor:pointer;font-weight:600;font-family:inherit;">Accept</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Show banner only if no consent decision stored
+      (function(){
+        var stored = null;
+        try { stored = localStorage.getItem('wd_cookie_consent'); } catch(e){}
+        if(!stored){
+          var banner = document.getElementById('wd-cookie-banner');
+          if(banner) banner.style.display = 'block';
+        }
+      })();
+    </script>
+  </body>
+</html>
