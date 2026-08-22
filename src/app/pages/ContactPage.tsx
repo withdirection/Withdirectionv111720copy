@@ -1,6 +1,7 @@
 import { Mail, Phone, MapPin, Clock, Calendar as CalendarIcon } from 'lucide-react';
 import { Contact } from '../components/Contact';
 import { useState, type FormEvent } from 'react';
+import { SERVICE_OPTIONS } from '../data/services';
 
 export function ContactPage() {
   const [requested, setRequested] = useState(false);
@@ -151,13 +152,11 @@ export function ContactPage() {
                   className="w-full px-4 py-3 border border-[#E6E9EF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A9E0]"
                 >
                   <option value="">Select a service...</option>
-                  <option value="interpreting">Sign Language Interpreting</option>
-                  <option value="corporate">Corporate Consulting</option>
-                  <option value="government">Government & International</option>
-                  <option value="video">Video Services</option>
-                  <option value="training">Training & Workshops</option>
-                  <option value="arts">Arts & Cultural Events</option>
-                  <option value="other">Other</option>
+                  {SERVICE_OPTIONS.map(({ id, label }) => (
+                    <option key={id} value={id}>
+                      {label}
+                    </option>
+                  ))}
                 </select>
               </div>
 

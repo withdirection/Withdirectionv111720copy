@@ -1,5 +1,6 @@
 import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
+import { SERVICE_OPTIONS } from '../data/services';
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -162,14 +163,11 @@ export function Contact() {
                   className="w-full px-4 py-3 border border-[#E6E9EF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A9E0] bg-white text-[#14213D]"
                 >
                   <option value="">Select a service</option>
-                  <option value="general-interpreting">General Interpreting Services</option>
-                  <option value="legal-interpreting">Legal Interpreting</option>
-                  <option value="multilingual-conference">Multilingual Conference Interpreting</option>
-                  <option value="consultation">Consultation</option>
-                  <option value="expert-services">Expert Services</option>
-                  <option value="tailored-training">Tailored Training</option>
-                  <option value="translation">Translation Services</option>
-                  <option value="other">Other</option>
+                  {SERVICE_OPTIONS.map(({ id, label }) => (
+                    <option key={id} value={id}>
+                      {label}
+                    </option>
+                  ))}
                 </select>
               </div>
 
