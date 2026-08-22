@@ -51,7 +51,7 @@ export function About() {
           {/* Credentials Banner */}
           <div className="max-w-6xl mx-auto bg-[#F5F7FA] rounded-lg p-8 border border-[#E6E9EF]">
             <div className="text-center mb-6">
-              <h4 className="text-[#14213D] text-2xl mb-2 font-semibold">Christopher Tester, Ph.D., CDI, SC:L</h4>
+              <h3 className="text-[#14213D] text-2xl mb-2 font-semibold">Christopher Tester, Ph.D., CDI, SC:L</h3>
               <p className="text-gray-600">Founder & Principal Interpreter</p>
             </div>
             

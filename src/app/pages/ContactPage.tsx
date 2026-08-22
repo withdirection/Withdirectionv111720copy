@@ -36,7 +36,7 @@ export function ContactPage() {
               <div className="w-12 h-12 bg-[#00A9E0] rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Mail className="text-white" size={24} />
               </div>
-              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Email Us</h3>
+              <h2 className="text-lg text-[#14213D] mb-2 font-semibold">Email Us</h2>
               <a
                 href="mailto:info@withdirection.net"
                 className="text-[#303F9F] hover:text-[#00A9E0] transition-colors"
@@ -49,7 +49,7 @@ export function ContactPage() {
               <div className="w-12 h-12 bg-[#303F9F] rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Phone className="text-white" size={24} />
               </div>
-              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Phone / VP</h3>
+              <h2 className="text-lg text-[#14213D] mb-2 font-semibold">Phone / VP</h2>
               <p className="text-gray-700">Contact us for details</p>
             </div>
 
@@ -57,7 +57,7 @@ export function ContactPage() {
               <div className="w-12 h-12 bg-[#CB6CE6] rounded-lg flex items-center justify-center mx-auto mb-4">
                 <MapPin className="text-white" size={24} />
               </div>
-              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Visit Us</h3>
+              <h2 className="text-lg text-[#14213D] mb-2 font-semibold">Visit Us</h2>
               <p className="text-gray-700">Brooklyn, NY</p>
             </div>
 
@@ -65,7 +65,7 @@ export function ContactPage() {
               <div className="w-12 h-12 bg-[#00A9E0] rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Clock className="text-white" size={24} />
               </div>
-              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Business Hours</h3>
+              <h2 className="text-lg text-[#14213D] mb-2 font-semibold">Business Hours</h2>
               <p className="text-gray-700">Mon-Fri: 9am-6pm EST</p>
             </div>
           </div>

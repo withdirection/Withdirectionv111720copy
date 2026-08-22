@@ -136,7 +136,7 @@ export function CommunityPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
-              <h3 className="text-xl text-[#14213D] mb-2">Have an accessible event to share?</h3>
+              <h2 className="text-xl text-[#14213D] mb-2">Have an accessible event to share?</h2>
               <p className="text-gray-600">Submit your event for inclusion in our community calendar</p>
             </div>
             <Link

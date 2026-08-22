@@ -22,7 +22,7 @@ export function Experience() {
               />
             </div>
             <div className="mt-4">
-              <h4 className="text-lg text-[#14213D] mb-2 font-semibold">Large-Scale Events</h4>
+              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Large-Scale Events</h3>
               <p className="text-gray-600">
                 Expert interpretation for conferences, summits, and audiences of all sizes
               </p>
@@ -38,7 +38,7 @@ export function Experience() {
               />
             </div>
             <div className="mt-4">
-              <h4 className="text-lg text-[#14213D] mb-2 font-semibold">Global Perspectives</h4>
+              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Global Perspectives</h3>
               <p className="text-gray-600">
                 Understanding diverse cultures and communication needs across international contexts
               </p>
