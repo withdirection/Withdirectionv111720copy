@@ -1,5 +1,6 @@
-import { Calendar, MapPin, Clock, Users, Instagram, Plus, ExternalLink, List, CalendarDays } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Instagram, Plus, List, CalendarDays } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router';
 
 // Mock events data - in production, this would come from a CMS or database
 const upcomingEvents = [
@@ -138,10 +139,13 @@ export function CommunityPage() {
               <h3 className="text-xl text-[#14213D] mb-2">Have an accessible event to share?</h3>
               <p className="text-gray-600">Submit your event for inclusion in our community calendar</p>
             </div>
-            <button className="flex items-center gap-2 bg-[#00A9E0] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors">
+            <Link
+              to="/contact"
+              className="flex items-center gap-2 bg-[#00A9E0] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+            >
               <Plus size={20} />
               Submit Event
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -289,11 +293,6 @@ export function CommunityPage() {
                     <p className="text-gray-700 text-sm mb-4 leading-relaxed">
                       {event.description}
                     </p>
-
-                    <button className="flex items-center gap-2 text-[#00A9E0] hover:text-[#303F9F] transition-colors text-sm font-medium">
-                      Learn More
-                      <ExternalLink size={16} />
-                    </button>
                   </div>
                 </div>
               ))}

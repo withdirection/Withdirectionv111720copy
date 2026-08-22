@@ -1,7 +1,17 @@
 import { Mail, Phone, MapPin, Clock, Calendar as CalendarIcon } from 'lucide-react';
 import { Contact } from '../components/Contact';
+import { useState, type FormEvent } from 'react';
 
 export function ContactPage() {
+  const [requested, setRequested] = useState(false);
+
+  // Consultation requests have no delivery backend yet. Intercept the submit so
+  // the fields never reach the query string, as they would on a native GET.
+  const handleConsultation = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setRequested(true);
+  };
+
   return (
     <div className="pt-20">
       {/* Hero Section */}
@@ -86,7 +96,7 @@ export function ContactPage() {
               </p>
             </div>
 
-            <div className="space-y-6">
+            <form className="space-y-6" onSubmit={handleConsultation}>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="consult-name" className="block text-sm text-gray-700 mb-2">
@@ -180,15 +190,31 @@ export function ContactPage() {
                 />
               </div>
 
-              <button className="w-full bg-[#00A9E0] text-white py-4 rounded-md hover:bg-[#303F9F] transition-all transform hover:scale-105 flex items-center justify-center gap-2 text-lg">
+              <button
+                type="submit"
+                className="w-full bg-[#00A9E0] text-white py-4 rounded-md hover:bg-[#303F9F] transition-all transform hover:scale-105 flex items-center justify-center gap-2 text-lg"
+              >
                 <CalendarIcon size={24} />
                 Request Consultation
               </button>
 
-              <p className="text-sm text-gray-600 text-center">
-                We'll respond within 24 hours to confirm your consultation time
-              </p>
-            </div>
+              {requested ? (
+                <p
+                  role="status"
+                  className="text-sm text-center text-[#14213D] bg-[#F5F7FA] border border-[#00A9E0] rounded-md px-4 py-3"
+                >
+                  Online booking is not connected yet. Please email{' '}
+                  <a href="mailto:info@withdirection.net" className="text-[#00A9E0] underline">
+                    info@withdirection.net
+                  </a>{' '}
+                  with your preferred times and we will confirm directly.
+                </p>
+              ) : (
+                <p className="text-sm text-gray-600 text-center">
+                  We'll respond within 24 hours to confirm your consultation time
+                </p>
+              )}
+            </form>
           </div>
         </div>
       </section>

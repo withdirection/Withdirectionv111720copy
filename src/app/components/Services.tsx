@@ -114,7 +114,7 @@ export function Services() {
                 Expert remote interpreting services delivered through secure, professional platforms. WITHdirection coordinates skilled interpreters for virtual meetings, conferences, and digital events with the same strategic planning and intentional coordination as our on-site services.
               </p>
               <Link
-                to="/services#remote"
+                to="/contact"
                 className="inline-flex items-center gap-2 bg-[#00A9E0] text-white px-6 py-3 rounded-lg hover:bg-[#0090c0] transition-colors"
               >
                 Book a Team of Interpreters Today

@@ -7,6 +7,7 @@ import { CommunityPage } from "./pages/CommunityPage";
 import { PortalPage } from "./pages/PortalPage";
 import { ResourcesPage } from "./pages/ResourcesPage";
 import { ContactPage } from "./pages/ContactPage";
+import { PrivacyPage } from "./pages/PrivacyPage";
 import { NotFound } from "./pages/NotFound";
 
 export const router = createBrowserRouter([
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
       { path: "portal", Component: PortalPage },
       { path: "resources", Component: ResourcesPage },
       { path: "contact", Component: ContactPage },
+      { path: "privacy", Component: PrivacyPage },
       { path: "*", Component: NotFound },
     ],
   },

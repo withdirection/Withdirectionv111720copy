@@ -75,7 +75,13 @@ group('internal links', () => {
       const ids = new Set<string>();
       const collect = (file: string) => {
         const src = read(file);
+        // Literal ids: <section id="contact">
         for (const m of src.matchAll(/\bid="([^"{]+)"/g)) ids.add(m[1]);
+        // Data-driven ids: services.map(s => <section id={s.id}>) fed by
+        // a literal array of { id: 'interpreting', ... } objects.
+        if (/\bid=\{[^}]+\}/.test(src)) {
+          for (const m of src.matchAll(/\bid:\s*'([^']+)'/g)) ids.add(m[1]);
+        }
         for (const m of src.matchAll(/from '\.\.\/components\/([A-Za-z]+)'/g)) {
           try {
             collect(`src/app/components/${m[1]}.tsx`);
