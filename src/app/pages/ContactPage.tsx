@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Clock, Send, Calendar as CalendarIcon } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Calendar as CalendarIcon } from 'lucide-react';
 import { Contact } from '../components/Contact';
 
 export function ContactPage() {

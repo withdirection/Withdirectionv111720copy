@@ -1,7 +1,6 @@
 import { MessageSquare, Globe, Briefcase, Award, GraduationCap, Calendar, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router';
 import remoteInterpretingImage from 'figma:asset/da07099dfc93f16634c5391070a86a8924c2795c.png';
-import gradientPattern from 'figma:asset/e15166bd80d22b048573bd472c6cbb5da8de4ad2.png';
 
 const services = [
   {
@@ -47,10 +46,17 @@ const services = [
 export function Services() {
   return (
     <section id="services" className="py-24 bg-white relative overflow-hidden">
-      {/* Background gradient pattern */}
-      <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
-        <img src={gradientPattern} alt="" className="w-full h-full object-cover" />
-      </div>
+      {/* Decorative background wash. The original Figma export referenced an image
+          asset that was never committed, which broke the production build; this is a
+          brand-palette stand-in. Swap back if the source asset is recovered. */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 right-0 w-1/3 h-full opacity-10"
+        style={{
+          backgroundImage:
+            'linear-gradient(160deg, #00A9E0 0%, #303F9F 45%, #CB6CE6 100%)',
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}

@@ -1,4 +1,3 @@
-import { Heart, Target, Users } from 'lucide-react';
 import unFlagsImage from 'figma:asset/0375baa168bf04c56aa03b7c5a21f228281fa189.png';
 import conferenceImage from 'figma:asset/f8de3ca95d86129de658f03985c5b63b01ec54ce.png';
 import bluePattern from 'figma:asset/bf45d3a67b22b59000eb0fa44033475e8a68fe85.png';

@@ -1,4 +1,4 @@
-import { Star, Quote, Heart, Target, Users } from 'lucide-react';
+import { Quote, Heart, Target, Users } from 'lucide-react';
 
 export function Testimonials() {
   const testimonials = [
