@@ -1,6 +1,18 @@
 import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
+import { useState, type FormEvent } from 'react';
 
 export function Contact() {
+  const [submitted, setSubmitted] = useState(false);
+
+  // The form has no delivery backend yet. Without an explicit handler the browser
+  // performs a native GET to the current URL, which puts every named field —
+  // name, email, phone, message — into the query string, where it is captured by
+  // analytics as page_location and retained in browser history. Intercept it.
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitted(true);
+  };
+
   return (
     <section id="contact" className="py-20 bg-white relative overflow-hidden">
       {/* Background Pattern */}
@@ -85,7 +97,7 @@ export function Contact() {
           {/* Contact Form */}
           <div className="bg-[#00A9E0]/10 p-8 rounded-lg border border-[#00A9E0]/30">
             <h3 className="text-2xl mb-6 text-[#14213D]">Send Us a Message</h3>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm mb-2 text-[#14213D]">
                   Name *
@@ -194,9 +206,22 @@ export function Contact() {
                 Send Message
               </button>
 
-              <p className="text-sm text-gray-500 text-center">
-                We'll get back to you as soon as possible
-              </p>
+              {submitted ? (
+                <p
+                  role="status"
+                  className="text-sm text-center text-[#14213D] bg-white border border-[#00A9E0] rounded-md px-4 py-3"
+                >
+                  Online submission is not connected yet. Please email{' '}
+                  <a href="mailto:info@withdirection.net" className="text-[#00A9E0] underline">
+                    info@withdirection.net
+                  </a>{' '}
+                  and we will respond directly.
+                </p>
+              ) : (
+                <p className="text-sm text-gray-500 text-center">
+                  We'll get back to you as soon as possible
+                </p>
+              )}
             </form>
           </div>
         </div>
