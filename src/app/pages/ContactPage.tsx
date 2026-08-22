@@ -49,13 +49,8 @@ export function ContactPage() {
               <div className="w-12 h-12 bg-[#303F9F] rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Phone className="text-white" size={24} />
               </div>
-              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Call Us</h3>
-              <a
-                href="tel:+15551234567"
-                className="text-[#303F9F] hover:text-[#00A9E0] transition-colors"
-              >
-                (555) 123-4567
-              </a>
+              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Phone / VP</h3>
+              <p className="text-gray-700">Contact us for details</p>
             </div>
 
             <div className="bg-[#F5F7FA] p-6 rounded-lg border border-[#E6E9EF] text-center">
@@ -131,7 +126,7 @@ export function ContactPage() {
                     type="tel"
                     id="consult-phone"
                     className="w-full px-4 py-3 border border-[#E6E9EF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A9E0]"
-                    placeholder="(555) 123-4567"
+                    placeholder="Phone or videophone number"
                   />
                 </div>
                 <div>

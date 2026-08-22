@@ -89,7 +89,7 @@ export function Footer() {
         <div className="border-t border-[#303F9F] pt-8 text-center text-gray-300">
           <p>© {currentYear} WITHdirection. All rights reserved.</p>
           <p className="mt-2 text-sm">
-            Empowering Deaf professionals through tailored communication services
+            Deaf-led interpreting, training, and accessibility consulting
           </p>
           <p className="mt-4 text-xs text-gray-400">
             Image Credits: UN Photo, Unsplash contributors. Stock images used for illustrative purposes.

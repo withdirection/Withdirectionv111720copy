@@ -155,7 +155,7 @@ export function ServicesPage() {
               Our <span className="text-[#00A9E0]">Services</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Comprehensive sign language interpreting and accessibility solutions tailored to your needs
+              Comprehensive sign language interpreting and accessibility services, planned around your setting
             </p>
           </div>
         </div>

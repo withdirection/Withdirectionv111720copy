@@ -170,7 +170,7 @@ export function AboutPage() {
               How We <span className="text-[#00A9E0]">Operate</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Our process ensures seamless, professional service every time
+              A coordinated process, planned around your setting
             </p>
           </div>
 
@@ -263,7 +263,7 @@ export function AboutPage() {
                 <Lightbulb className="text-[#00A9E0]" size={32} />
               </div>
               <div>
-                <h3 className="text-xl mb-2 text-[#14213D]">Innovative Solutions</h3>
+                <h3 className="text-xl mb-2 text-[#14213D]">Evolving Practice</h3>
                 <p className="text-gray-700">
                   We stay ahead of technology and best practices, offering remote services, 
                   video translation, and custom training.
