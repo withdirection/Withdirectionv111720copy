@@ -1,0 +1,33 @@
+{
+  "name": "WITHdirection site",
+
+  // Node 22 matches the version CI runs, so a green Codespace means a green PR.
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+
+  // Runs once when the Codespace is built. Chromium is needed for the browser
+  // tests; it is the slowest part of setup, so it happens here rather than on
+  // every start.
+  "onCreateCommand": "npm ci && npx playwright install --with-deps chromium",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bradlc.vscode-tailwindcss",
+        "ms-playwright.playwright",
+        "vitest.explorer"
+      ],
+      "settings": {
+        "editor.formatOnSave": false,
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  },
+
+  "forwardPorts": [5173, 4173],
+  "portsAttributes": {
+    "5173": { "label": "dev server", "onAutoForward": "openPreview" },
+    "4173": { "label": "production preview" }
+  },
+
+  "remoteUser": "node"
+}
