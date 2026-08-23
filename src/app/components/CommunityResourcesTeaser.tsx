@@ -61,7 +61,7 @@ export function CommunityResourcesTeaser() {
 
             <Link
               to="/community"
-              className="inline-flex items-center gap-2 bg-[#00A9E0] text-white px-4 py-2 rounded-md hover:bg-[#303F9F] transition-all shadow-md hover:shadow-lg group-hover:gap-3"
+              className="inline-flex items-center gap-2 bg-[#0078B4] text-white px-4 py-2 rounded-md hover:bg-[#303F9F] transition-all shadow-md hover:shadow-lg group-hover:gap-3"
             >
               View Calendar
               <ArrowRight size={18} />
@@ -101,7 +101,7 @@ export function CommunityResourcesTeaser() {
 
             <Link
               to="/resources"
-              className="inline-flex items-center gap-2 bg-[#CB6CE6] text-white px-4 py-2 rounded-md hover:bg-[#303F9F] transition-all shadow-md hover:shadow-lg group-hover:gap-3"
+              className="inline-flex items-center gap-2 bg-[#B52ADC] text-white px-4 py-2 rounded-md hover:bg-[#303F9F] transition-all shadow-md hover:shadow-lg group-hover:gap-3"
             >
               Explore Resources
               <ArrowRight size={18} />

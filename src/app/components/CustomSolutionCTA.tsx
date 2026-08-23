@@ -20,11 +20,11 @@ export function CustomSolutionCTA() {
           Need a Customized Solution?
         </h2>
         <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-          We're here to help create a service package that works for you. Every organization has unique needs, and we pride ourselves on delivering tailored solutions.
+          We're here to help create a service package that works for you. Every organization has unique needs, and we plan each engagement around them.
         </p>
         <Link
           to="/contact"
-          className="inline-block bg-[#00A9E0] text-white px-10 py-4 rounded-md hover:bg-[#303F9F] transition-all text-lg transform hover:scale-105 shadow-lg hover:shadow-xl"
+          className="inline-block bg-[#0078B4] text-white px-10 py-4 rounded-md hover:bg-[#303F9F] transition-all text-lg transform hover:scale-105 shadow-lg hover:shadow-xl"
         >
           Discuss Your Needs
         </Link>

@@ -1,7 +1,18 @@
-import { Mail, Phone, MapPin, Clock, Send, Calendar as CalendarIcon } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Calendar as CalendarIcon } from 'lucide-react';
 import { Contact } from '../components/Contact';
+import { useState, type FormEvent } from 'react';
+import { SERVICE_OPTIONS } from '../data/services';
 
 export function ContactPage() {
+  const [requested, setRequested] = useState(false);
+
+  // Consultation requests have no delivery backend yet. Intercept the submit so
+  // the fields never reach the query string, as they would on a native GET.
+  const handleConsultation = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setRequested(true);
+  };
+
   return (
     <div className="pt-20">
       {/* Hero Section */}
@@ -26,7 +37,7 @@ export function ContactPage() {
               <div className="w-12 h-12 bg-[#00A9E0] rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Mail className="text-white" size={24} />
               </div>
-              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Email Us</h3>
+              <h2 className="text-lg text-[#14213D] mb-2 font-semibold">Email Us</h2>
               <a
                 href="mailto:info@withdirection.net"
                 className="text-[#303F9F] hover:text-[#00A9E0] transition-colors"
@@ -39,20 +50,15 @@ export function ContactPage() {
               <div className="w-12 h-12 bg-[#303F9F] rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Phone className="text-white" size={24} />
               </div>
-              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Call Us</h3>
-              <a
-                href="tel:+15551234567"
-                className="text-[#303F9F] hover:text-[#00A9E0] transition-colors"
-              >
-                (555) 123-4567
-              </a>
+              <h2 className="text-lg text-[#14213D] mb-2 font-semibold">Phone / VP</h2>
+              <p className="text-gray-700">Contact us for details</p>
             </div>
 
             <div className="bg-[#F5F7FA] p-6 rounded-lg border border-[#E6E9EF] text-center">
               <div className="w-12 h-12 bg-[#CB6CE6] rounded-lg flex items-center justify-center mx-auto mb-4">
                 <MapPin className="text-white" size={24} />
               </div>
-              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Visit Us</h3>
+              <h2 className="text-lg text-[#14213D] mb-2 font-semibold">Visit Us</h2>
               <p className="text-gray-700">Brooklyn, NY</p>
             </div>
 
@@ -60,7 +66,7 @@ export function ContactPage() {
               <div className="w-12 h-12 bg-[#00A9E0] rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Clock className="text-white" size={24} />
               </div>
-              <h3 className="text-lg text-[#14213D] mb-2 font-semibold">Business Hours</h3>
+              <h2 className="text-lg text-[#14213D] mb-2 font-semibold">Business Hours</h2>
               <p className="text-gray-700">Mon-Fri: 9am-6pm EST</p>
             </div>
           </div>
@@ -86,7 +92,7 @@ export function ContactPage() {
               </p>
             </div>
 
-            <div className="space-y-6">
+            <form className="space-y-6" onSubmit={handleConsultation}>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="consult-name" className="block text-sm text-gray-700 mb-2">
@@ -121,7 +127,7 @@ export function ContactPage() {
                     type="tel"
                     id="consult-phone"
                     className="w-full px-4 py-3 border border-[#E6E9EF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A9E0]"
-                    placeholder="(555) 123-4567"
+                    placeholder="Phone or videophone number"
                   />
                 </div>
                 <div>
@@ -146,13 +152,11 @@ export function ContactPage() {
                   className="w-full px-4 py-3 border border-[#E6E9EF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A9E0]"
                 >
                   <option value="">Select a service...</option>
-                  <option value="interpreting">Sign Language Interpreting</option>
-                  <option value="corporate">Corporate Consulting</option>
-                  <option value="government">Government & International</option>
-                  <option value="video">Video Services</option>
-                  <option value="training">Training & Workshops</option>
-                  <option value="arts">Arts & Cultural Events</option>
-                  <option value="other">Other</option>
+                  {SERVICE_OPTIONS.map(({ id, label }) => (
+                    <option key={id} value={id}>
+                      {label}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -180,15 +184,31 @@ export function ContactPage() {
                 />
               </div>
 
-              <button className="w-full bg-[#00A9E0] text-white py-4 rounded-md hover:bg-[#303F9F] transition-all transform hover:scale-105 flex items-center justify-center gap-2 text-lg">
+              <button
+                type="submit"
+                className="w-full bg-[#0078B4] text-white py-4 rounded-md hover:bg-[#303F9F] transition-all transform hover:scale-105 flex items-center justify-center gap-2 text-lg"
+              >
                 <CalendarIcon size={24} />
                 Request Consultation
               </button>
 
-              <p className="text-sm text-gray-600 text-center">
-                We'll respond within 24 hours to confirm your consultation time
-              </p>
-            </div>
+              {requested ? (
+                <p
+                  role="status"
+                  className="text-sm text-center text-[#14213D] bg-[#F5F7FA] border border-[#00A9E0] rounded-md px-4 py-3"
+                >
+                  Online booking is not connected yet. Please email{' '}
+                  <a href="mailto:info@withdirection.net" className="text-[#00A9E0] underline">
+                    info@withdirection.net
+                  </a>{' '}
+                  with your preferred times and we will confirm directly.
+                </p>
+              ) : (
+                <p className="text-sm text-gray-600 text-center">
+                  We'll respond within 24 hours to confirm your consultation time
+                </p>
+              )}
+            </form>
           </div>
         </div>
       </section>

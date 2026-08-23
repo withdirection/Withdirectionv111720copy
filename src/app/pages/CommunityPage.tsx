@@ -1,113 +1,24 @@
-import { Calendar, MapPin, Clock, Users, Instagram, Plus, ExternalLink, List, CalendarDays } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Instagram, Plus, List, CalendarDays } from 'lucide-react';
 import { useState } from 'react';
-
-// Mock events data - in production, this would come from a CMS or database
-const upcomingEvents = [
-  {
-    id: 1,
-    title: 'ASL Tour: Contemporary Art Exhibition',
-    organization: 'Whitney Museum of American Art',
-    date: 'March 15, 2026',
-    time: '2:00 PM - 3:30 PM',
-    location: 'Whitney Museum, Manhattan',
-    type: 'Museum Access',
-    description: 'Join us for an ASL-interpreted tour of the latest contemporary art exhibition.',
-    accessible: true,
-    deafLed: false,
-    virtual: false,
-  },
-  {
-    id: 2,
-    title: 'Deaf Artists Showcase',
-    organization: 'Brooklyn Museum',
-    date: 'March 22, 2026',
-    time: '6:00 PM - 8:00 PM',
-    location: 'Brooklyn Museum, Brooklyn',
-    type: 'Arts & Culture',
-    description: 'A Deaf-led celebration of visual arts featuring local Deaf artists.',
-    accessible: true,
-    deafLed: true,
-    virtual: false,
-  },
-  {
-    id: 3,
-    title: 'Drawing Workshop with ASL Interpretation',
-    organization: 'The Drawing Center',
-    date: 'March 28, 2026',
-    time: '1:00 PM - 4:00 PM',
-    location: 'The Drawing Center, SoHo',
-    type: 'Workshop',
-    description: 'Hands-on drawing workshop with professional ASL interpretation provided.',
-    accessible: true,
-    deafLed: false,
-    virtual: false,
-  },
-  {
-    id: 4,
-    title: 'Community Sign Language Social',
-    organization: 'Brooklyn Public Library',
-    date: 'April 5, 2026',
-    time: '7:00 PM - 9:00 PM',
-    location: 'Brooklyn Public Library, Central Branch',
-    type: 'Community Event',
-    description: 'Open social event for ASL learners and the Deaf community to connect.',
-    accessible: true,
-    deafLed: true,
-    virtual: false,
-  },
-  {
-    id: 5,
-    title: 'Accessible Theatre Performance: Spring Awakening',
-    organization: 'Signature Theatre',
-    date: 'April 12, 2026',
-    time: '7:30 PM',
-    location: 'Signature Theatre, Manhattan',
-    type: 'Performance',
-    description: 'ASL-interpreted performance with Deaf and hearing actors.',
-    accessible: true,
-    deafLed: false,
-    virtual: false,
-  },
-  {
-    id: 6,
-    title: 'Virtual ASL Coffee Chat',
-    organization: 'WITHdirection',
-    date: 'March 25, 2026',
-    time: '10:00 AM - 11:00 AM',
-    location: 'Virtual (Zoom)',
-    type: 'Community Event',
-    description: 'Join us online for a casual conversation in ASL. Perfect for practicing and connecting with others.',
-    accessible: true,
-    deafLed: true,
-    virtual: true,
-  },
-  {
-    id: 7,
-    title: 'Online Workshop: Deaf Culture 101',
-    organization: 'WITHdirection',
-    date: 'April 2, 2026',
-    time: '6:00 PM - 7:30 PM',
-    location: 'Virtual (Zoom)',
-    type: 'Workshop',
-    description: 'Learn about Deaf culture, etiquette, and community values in this interactive online session.',
-    accessible: true,
-    deafLed: true,
-    virtual: true,
-  },
-];
+import {
+  FILTERS,
+  calendarMonths,
+  events,
+  filterEvents,
+  formatEventDate,
+  upcomingEvents,
+} from '../data/events';
+import { Link } from 'react-router';
 
 export function CommunityPage() {
   const [filter, setFilter] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list');
 
-  const filteredEvents = filter === 'all' 
-    ? upcomingEvents 
-    : upcomingEvents.filter(event => {
-        if (filter === 'deaf-led') return event.deafLed;
-        if (filter === 'virtual') return event.virtual;
-        if (filter === 'arts') return event.type.includes('Arts') || event.type.includes('Museum') || event.type.includes('Performance');
-        return event.type === filter;
-      });
+  // Only ever advertise events that have not happened yet. The list is static
+  // placeholder data today, so this legitimately renders empty.
+  const filteredEvents = filterEvents(upcomingEvents(events), filter);
+  const months = calendarMonths(filteredEvents);
+
 
   return (
     <div className="pt-20">
@@ -122,8 +33,8 @@ export function CommunityPage() {
               Accessible events with sign language interpretation throughout Brooklyn and NYC
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <span className="bg-[#00A9E0] px-4 py-2 rounded-full text-sm">Deaf-Led Events</span>
-              <span className="bg-[#CB6CE6] px-4 py-2 rounded-full text-sm">Arts & Cultural Programs</span>
+              <span className="bg-[#0078B4] px-4 py-2 rounded-full text-sm">Deaf-Led Events</span>
+              <span className="bg-[#B52ADC] px-4 py-2 rounded-full text-sm">Arts & Cultural Programs</span>
               <span className="bg-[#303F9F] px-4 py-2 rounded-full text-sm">Community Announcements</span>
             </div>
           </div>
@@ -135,13 +46,16 @@ export function CommunityPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
-              <h3 className="text-xl text-[#14213D] mb-2">Have an accessible event to share?</h3>
+              <h2 className="text-xl text-[#14213D] mb-2">Have an accessible event to share?</h2>
               <p className="text-gray-600">Submit your event for inclusion in our community calendar</p>
             </div>
-            <button className="flex items-center gap-2 bg-[#00A9E0] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors">
+            <Link
+              to="/contact"
+              className="flex items-center gap-2 bg-[#0078B4] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+            >
               <Plus size={20} />
               Submit Event
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -152,66 +66,20 @@ export function CommunityPage() {
           <div className="flex flex-wrap items-center justify-between gap-3">
             {/* Filter Buttons */}
             <div className="flex flex-wrap gap-3">
-              <button
-                onClick={() => setFilter('all')}
-                className={`px-4 py-2 rounded-md transition-colors ${
-                  filter === 'all' 
-                    ? 'bg-[#00A9E0] text-white' 
-                    : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
-                }`}
-              >
-                All Events
-              </button>
-              <button
-                onClick={() => setFilter('deaf-led')}
-                className={`px-4 py-2 rounded-md transition-colors ${
-                  filter === 'deaf-led' 
-                    ? 'bg-[#00A9E0] text-white' 
-                    : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
-                }`}
-              >
-                Deaf-Led
-              </button>
-              <button
-                onClick={() => setFilter('virtual')}
-                className={`px-4 py-2 rounded-md transition-colors ${
-                  filter === 'virtual' 
-                    ? 'bg-[#00A9E0] text-white' 
-                    : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
-                }`}
-              >
-                Virtual
-              </button>
-              <button
-                onClick={() => setFilter('arts')}
-                className={`px-4 py-2 rounded-md transition-colors ${
-                  filter === 'arts' 
-                    ? 'bg-[#00A9E0] text-white' 
-                    : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
-                }`}
-              >
-                Arts & Culture
-              </button>
-              <button
-                onClick={() => setFilter('Workshop')}
-                className={`px-4 py-2 rounded-md transition-colors ${
-                  filter === 'Workshop' 
-                    ? 'bg-[#00A9E0] text-white' 
-                    : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
-                }`}
-              >
-                Workshops
-              </button>
-              <button
-                onClick={() => setFilter('Community Event')}
-                className={`px-4 py-2 rounded-md transition-colors ${
-                  filter === 'Community Event' 
-                    ? 'bg-[#00A9E0] text-white' 
-                    : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
-                }`}
-              >
-                Community
-              </button>
+              {FILTERS.map(({ key, label }) => (
+                <button
+                  key={key}
+                  onClick={() => setFilter(key)}
+                  aria-pressed={filter === key}
+                  className={`px-4 py-2 rounded-md transition-colors ${
+                    filter === key
+                      ? 'bg-[#0078B4] text-white'
+                      : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
 
             {/* View Toggle - Compact */}
@@ -258,11 +126,11 @@ export function CommunityPage() {
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       {event.deafLed && (
-                        <span className="bg-[#00A9E0] text-white text-xs px-2 py-1 rounded">
+                        <span className="bg-[#0078B4] text-white text-xs px-2 py-1 rounded">
                           Deaf-Led
                         </span>
                       )}
-                      <span className="bg-[#CB6CE6] text-white text-xs px-2 py-1 rounded">
+                      <span className="bg-[#B52ADC] text-white text-xs px-2 py-1 rounded">
                         {event.type}
                       </span>
                     </div>
@@ -274,7 +142,7 @@ export function CommunityPage() {
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center gap-2 text-gray-600 text-sm">
                         <Calendar size={16} />
-                        <span>{event.date}</span>
+                        <span>{formatEventDate(event.date)}</span>
                       </div>
                       <div className="flex items-center gap-2 text-gray-600 text-sm">
                         <Clock size={16} />
@@ -289,11 +157,6 @@ export function CommunityPage() {
                     <p className="text-gray-700 text-sm mb-4 leading-relaxed">
                       {event.description}
                     </p>
-
-                    <button className="flex items-center gap-2 text-[#00A9E0] hover:text-[#303F9F] transition-colors text-sm font-medium">
-                      Learn More
-                      <ExternalLink size={16} />
-                    </button>
                   </div>
                 </div>
               ))}
@@ -302,113 +165,73 @@ export function CommunityPage() {
 
           {/* Calendar View */}
           {viewMode === 'calendar' && (
-            <div className="bg-white rounded-lg border border-[#E6E9EF] p-8">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl text-[#14213D] mb-2">March - April 2026</h3>
-                <p className="text-gray-600">Click on a date to see event details</p>
-              </div>
-              
-              {/* Calendar Grid */}
-              <div className="max-w-5xl mx-auto">
-                <div className="grid grid-cols-7 gap-2 mb-4">
-                  {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                    <div key={day} className="text-center text-sm font-medium text-gray-600 py-2">
-                      {day}
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="grid grid-cols-7 gap-2">
-                  {/* March 2026 - Starting on Saturday */}
-                  {[...Array(6)].map((_, i) => (
-                    <div key={`empty-${i}`} className="aspect-square"></div>
-                  ))}
-                  
-                  {/* March days */}
-                  {[...Array(31)].map((_, i) => {
-                    const day = i + 1;
-                    const eventsOnDay = filteredEvents.filter(e => {
-                      const eventDay = parseInt(e.date.split(' ')[1].replace(',', ''));
-                      const eventMonth = e.date.split(' ')[0];
-                      return eventDay === day && eventMonth === 'March';
-                    });
-                    
-                    return (
+            <div className="space-y-10">
+              {months.map((month) => (
+                <div
+                  key={`${month.year}-${month.month}`}
+                  className="bg-white rounded-lg border border-[#E6E9EF] p-6 lg:p-8"
+                >
+                  <h3 className="text-2xl text-[#14213D] mb-6 text-center">{month.label}</h3>
+
+                  <div className="grid grid-cols-7 gap-2 mb-2">
+                    {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
                       <div
                         key={day}
-                        className={`aspect-square border rounded-lg p-2 hover:border-[#00A9E0] transition-colors ${
-                          eventsOnDay.length > 0 
-                            ? 'bg-[#00A9E0]/10 border-[#00A9E0] cursor-pointer' 
-                            : 'border-[#E6E9EF]'
-                        }`}
+                        className="text-center text-sm font-medium text-gray-600 py-2"
                       >
-                        <div className="text-sm font-medium text-[#14213D] mb-1">{day}</div>
-                        {eventsOnDay.length > 0 && (
-                          <div className="space-y-1">
-                            {eventsOnDay.map(event => (
-                              <div
-                                key={event.id}
-                                className="text-xs bg-[#00A9E0] text-white px-1 py-0.5 rounded truncate"
-                                title={event.title}
-                              >
-                                {event.title}
-                              </div>
-                            ))}
-                          </div>
-                        )}
+                        {day}
                       </div>
-                    );
-                  })}
-                  
-                  {/* April days */}
-                  {[...Array(12)].map((_, i) => {
-                    const day = i + 1;
-                    const eventsOnDay = filteredEvents.filter(e => {
-                      const eventDay = parseInt(e.date.split(' ')[1].replace(',', ''));
-                      const eventMonth = e.date.split(' ')[0];
-                      return eventDay === day && eventMonth === 'April';
-                    });
-                    
-                    return (
+                    ))}
+                  </div>
+
+                  <div className="grid grid-cols-7 gap-2">
+                    {Array.from({ length: month.leadingBlanks }, (_, i) => (
+                      <div key={`blank-${i}`} className="aspect-square" />
+                    ))}
+
+                    {month.days.map(({ day, events: dayEvents }) => (
                       <div
-                        key={`april-${day}`}
-                        className={`aspect-square border rounded-lg p-2 hover:border-[#00A9E0] transition-colors ${
-                          eventsOnDay.length > 0 
-                            ? 'bg-[#00A9E0]/10 border-[#00A9E0] cursor-pointer' 
+                        key={day}
+                        className={`aspect-square border rounded-lg p-2 ${
+                          dayEvents.length > 0
+                            ? 'bg-[#00A9E0]/10 border-[#00A9E0]'
                             : 'border-[#E6E9EF]'
                         }`}
                       >
                         <div className="text-sm font-medium text-[#14213D] mb-1">{day}</div>
-                        {eventsOnDay.length > 0 && (
-                          <div className="space-y-1">
-                            {eventsOnDay.map(event => (
-                              <div
-                                key={event.id}
-                                className="text-xs bg-[#00A9E0] text-white px-1 py-0.5 rounded truncate"
-                                title={event.title}
-                              >
-                                {event.title}
-                              </div>
-                            ))}
-                          </div>
-                        )}
+                        <div className="space-y-1">
+                          {dayEvents.map((event) => (
+                            <div
+                              key={event.id}
+                              className="text-xs bg-[#0078B4] text-white px-1 py-0.5 rounded truncate"
+                              title={event.title}
+                            >
+                              {event.title}
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    );
-                  })}
+                    ))}
+                  </div>
                 </div>
-              </div>
-              
-              {/* Legend */}
-              <div className="mt-8 flex justify-center gap-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-[#00A9E0] rounded"></div>
-                  <span className="text-sm text-gray-600">Has Events</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border border-[#E6E9EF] rounded"></div>
-                  <span className="text-sm text-gray-600">No Events</span>
-                </div>
-              </div>
+              ))}
+            </div>
+          )}
+
+          {filteredEvents.length === 0 && (
+            <div className="text-center py-16">
+              <h3 className="text-2xl text-[#14213D] mb-3">No upcoming events right now</h3>
+              <p className="text-gray-600 max-w-xl mx-auto mb-6">
+                We publish accessible events as they are confirmed. Follow us on Instagram
+                for announcements, or tell us about an event you are running.
+              </p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 bg-[#0078B4] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+              >
+                <Plus size={20} />
+                Submit an Event
+              </Link>
             </div>
           )}
         </div>
