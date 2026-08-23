@@ -13,7 +13,7 @@ export function NotFound() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 bg-[#00A9E0] text-white px-8 py-4 rounded-md hover:bg-[#303F9F] transition-colors"
+            className="inline-flex items-center gap-2 bg-[#0078B4] text-white px-8 py-4 rounded-md hover:bg-[#303F9F] transition-colors"
           >
             <Home size={20} />
             Go to Homepage

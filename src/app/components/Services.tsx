@@ -81,7 +81,7 @@ export function Services() {
                 </div>
                 <h3 className="text-xl mb-3 text-[#14213D] group-hover:text-[#00A9E0] transition-colors">{service.title}</h3>
                 <p className="text-gray-600 mb-4">{service.description}</p>
-                <span className="inline-flex items-center gap-2 text-[#00A9E0] text-sm font-medium group-hover:gap-3 transition-all">
+                <span className="inline-flex items-center gap-2 text-[#0078B4] text-sm font-medium group-hover:gap-3 transition-all">
                   Learn More
                   <ArrowRight size={16} />
                 </span>
@@ -115,7 +115,7 @@ export function Services() {
               </p>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-[#00A9E0] text-white px-6 py-3 rounded-lg hover:bg-[#0090c0] transition-colors"
+                className="inline-flex items-center gap-2 bg-[#0078B4] text-white px-6 py-3 rounded-lg hover:bg-[#0090c0] transition-colors"
               >
                 Book a Team of Interpreters Today
                 <ArrowRight size={20} />

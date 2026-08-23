@@ -186,7 +186,7 @@ export function ContactPage() {
 
               <button
                 type="submit"
-                className="w-full bg-[#00A9E0] text-white py-4 rounded-md hover:bg-[#303F9F] transition-all transform hover:scale-105 flex items-center justify-center gap-2 text-lg"
+                className="w-full bg-[#0078B4] text-white py-4 rounded-md hover:bg-[#303F9F] transition-all transform hover:scale-105 flex items-center justify-center gap-2 text-lg"
               >
                 <CalendarIcon size={24} />
                 Request Consultation

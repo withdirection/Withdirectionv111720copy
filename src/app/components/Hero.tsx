@@ -32,7 +32,7 @@ export function Hero() {
           <div className="flex flex-col gap-4">
             <Link
               to="/contact"
-              className="inline-block bg-[#00A9E0] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-all text-base transform hover:scale-105 shadow-lg hover:shadow-xl w-fit"
+              className="inline-block bg-[#0078B4] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-all text-base transform hover:scale-105 shadow-lg hover:shadow-xl w-fit"
             >
               Request Consultation
             </Link>

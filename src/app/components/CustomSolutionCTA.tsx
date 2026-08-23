@@ -24,7 +24,7 @@ export function CustomSolutionCTA() {
         </p>
         <Link
           to="/contact"
-          className="inline-block bg-[#00A9E0] text-white px-10 py-4 rounded-md hover:bg-[#303F9F] transition-all text-lg transform hover:scale-105 shadow-lg hover:shadow-xl"
+          className="inline-block bg-[#0078B4] text-white px-10 py-4 rounded-md hover:bg-[#303F9F] transition-all text-lg transform hover:scale-105 shadow-lg hover:shadow-xl"
         >
           Discuss Your Needs
         </Link>

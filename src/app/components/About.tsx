@@ -31,7 +31,7 @@ export function About() {
               </p>
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 text-[#00A9E0] hover:text-[#14213D] transition-colors text-lg"
+                className="inline-flex items-center gap-2 text-[#0078B4] hover:text-[#14213D] transition-colors text-lg"
               >
                 Read More About Our Story
                 <ArrowRight size={20} />

@@ -219,7 +219,7 @@ export function ServicesPage() {
                   <div className="mt-8">
                     <Link
                       to="/contact"
-                      className="inline-flex items-center gap-2 bg-[#00A9E0] text-white px-8 py-4 rounded-md hover:bg-[#303F9F] transition-all transform hover:scale-105"
+                      className="inline-flex items-center gap-2 bg-[#0078B4] text-white px-8 py-4 rounded-md hover:bg-[#303F9F] transition-all transform hover:scale-105"
                     >
                       Get Started with {service.title}
                       <ArrowRight size={20} />
@@ -243,7 +243,7 @@ export function ServicesPage() {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-[#00A9E0] text-white px-8 py-4 rounded-md hover:bg-[#303F9F] transition-all transform hover:scale-105 text-lg"
+            className="inline-flex items-center gap-2 bg-[#0078B4] text-white px-8 py-4 rounded-md hover:bg-[#303F9F] transition-all transform hover:scale-105 text-lg"
           >
             Schedule a Consultation
             <ArrowRight size={24} />

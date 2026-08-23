@@ -29,7 +29,7 @@ export function PortalPage() {
               onClick={() => setActiveTab('client')}
               className={`flex-1 py-4 px-6 rounded-lg transition-all ${
                 activeTab === 'client'
-                  ? 'bg-[#00A9E0] text-white'
+                  ? 'bg-[#0078B4] text-white'
                   : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
               }`}
             >
@@ -40,7 +40,7 @@ export function PortalPage() {
               onClick={() => setActiveTab('interpreter')}
               className={`flex-1 py-4 px-6 rounded-lg transition-all ${
                 activeTab === 'interpreter'
-                  ? 'bg-[#00A9E0] text-white'
+                  ? 'bg-[#0078B4] text-white'
                   : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
               }`}
             >
@@ -75,7 +75,7 @@ export function PortalPage() {
                   </p>
                   <Link
                     to="/contact"
-                    className="inline-block w-full text-center bg-[#00A9E0] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+                    className="inline-block w-full text-center bg-[#0078B4] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors"
                   >
                     Contact Us
                   </Link>
@@ -113,7 +113,7 @@ export function PortalPage() {
                 </div>
                 <Link
                   to="/contact"
-                  className="block w-full text-center bg-[#CB6CE6] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+                  className="block w-full text-center bg-[#B52ADC] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors"
                 >
                   Get Started
                 </Link>
@@ -172,7 +172,7 @@ export function PortalPage() {
                   </p>
                   <Link
                     to="/contact"
-                    className="inline-block w-full text-center bg-[#00A9E0] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+                    className="inline-block w-full text-center bg-[#0078B4] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors"
                   >
                     Contact Us
                   </Link>
@@ -211,7 +211,7 @@ export function PortalPage() {
                 </div>
                 <Link
                   to="/contact"
-                  className="block w-full text-center bg-[#CB6CE6] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors mb-3"
+                  className="block w-full text-center bg-[#B52ADC] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors mb-3"
                 >
                   Apply to Join
                 </Link>
@@ -259,7 +259,7 @@ export function PortalPage() {
               <p className="text-gray-700 text-sm">
                 All portal access is encrypted and secure. We take your privacy seriously and never 
                 share your information with third parties. For support with portal access, contact us 
-                at <a href="mailto:support@withdirection.net" className="text-[#00A9E0] hover:underline">support@withdirection.net</a>
+                at <a href="mailto:support@withdirection.net" className="text-[#0078B4] underline underline-offset-2 hover:no-underline">support@withdirection.net</a>
               </p>
             </div>
           </div>

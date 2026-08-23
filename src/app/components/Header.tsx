@@ -79,37 +79,37 @@ export function Header() {
           }`}>
             <Link
               to="/about"
-              className="text-white hover:text-[#00A9E0] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#00A9E0] after:transition-all hover:after:w-full"
+              className="text-white hover:text-[#00A9E0] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#0078B4] after:transition-all hover:after:w-full"
             >
               About
             </Link>
             <Link
               to="/services"
-              className="text-white hover:text-[#00A9E0] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#00A9E0] after:transition-all hover:after:w-full"
+              className="text-white hover:text-[#00A9E0] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#0078B4] after:transition-all hover:after:w-full"
             >
               Services
             </Link>
             <Link
               to="/community"
-              className="text-white hover:text-[#00A9E0] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#00A9E0] after:transition-all hover:after:w-full"
+              className="text-white hover:text-[#00A9E0] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#0078B4] after:transition-all hover:after:w-full"
             >
               Community
             </Link>
             <Link
               to="/resources"
-              className="text-white hover:text-[#00A9E0] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#00A9E0] after:transition-all hover:after:w-full"
+              className="text-white hover:text-[#00A9E0] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#0078B4] after:transition-all hover:after:w-full"
             >
               Resources
             </Link>
             <Link
               to="/portal"
-              className="text-white hover:text-[#00A9E0] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#00A9E0] after:transition-all hover:after:w-full"
+              className="text-white hover:text-[#00A9E0] transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#0078B4] after:transition-all hover:after:w-full"
             >
               Portal
             </Link>
             <Link
               to="/services"
-              className="bg-[#00A9E0] text-white px-4 py-2 rounded-md hover:bg-[#CB6CE6] transition-all transform hover:scale-105 hover:shadow-lg max-w-[100px] text-center leading-tight"
+              className="bg-[#0078B4] text-white px-4 py-2 rounded-md hover:bg-[#B52ADC] transition-all transform hover:scale-105 hover:shadow-lg max-w-[100px] text-center leading-tight"
             >
               Request Services
             </Link>
@@ -166,7 +166,7 @@ export function Header() {
               </Link>
               <Link
                 to="/services"
-                className="bg-[#00A9E0] text-white px-4 py-2 rounded-md hover:bg-[#CB6CE6] transition-all text-left transform hover:scale-105 max-w-[100px] text-center leading-tight"
+                className="bg-[#0078B4] text-white px-4 py-2 rounded-md hover:bg-[#B52ADC] transition-all text-left transform hover:scale-105 max-w-[100px] text-center leading-tight"
               >
                 Request Services
               </Link>

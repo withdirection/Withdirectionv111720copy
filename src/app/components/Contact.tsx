@@ -59,7 +59,7 @@ export function Contact() {
                     <p className="text-sm text-gray-500 mb-1">Email</p>
                     <a
                       href="mailto:info@withdirection.net"
-                      className="text-lg text-[#00A9E0] hover:underline"
+                      className="text-lg text-[#0078B4] underline underline-offset-2 hover:no-underline"
                     >
                       info@withdirection.net
                     </a>
@@ -199,7 +199,7 @@ export function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-[#00A9E0] text-white px-8 py-3 rounded-md hover:bg-[#14213D] transition-colors text-lg"
+                className="w-full bg-[#0078B4] text-white px-8 py-3 rounded-md hover:bg-[#14213D] transition-colors text-lg"
               >
                 Send Message
               </button>

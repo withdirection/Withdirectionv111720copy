@@ -29,9 +29,7 @@ async function runAxe(page: import('@playwright/test').Page): Promise<AxeViolati
     // @ts-expect-error injected at runtime
     const results = await window.axe.run(document, {
       runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },
-      // colour-contrast is checked separately below. It currently fails site-wide
-      // because both brand accents fall short of AA, and resolving that is a
-      // brand decision rather than a code fix — see the fixme block.
+      // colour-contrast has its own block below, with its own reporting.
       rules: { 'color-contrast': { enabled: false } },
     });
     return results.violations;
@@ -107,25 +105,31 @@ test('honours a reduced-motion preference', async ({ browser }) => {
 /**
  * Colour contrast, checked in a real browser because jsdom cannot paint.
  *
- * Currently failing site-wide, and deliberately not gating CI: both brand
- * accents from guidelines/Guidelines.md fall short of WCAG AA for normal text.
+ * The brand accents come in pairs, and which one to use depends on the ground
+ * behind them — this is the thing to get right when adding new components:
  *
- *   white on #00A9E0 (Accent Blue)    2.71:1   needs 4.5:1
- *   #00A9E0 text on white             2.71:1   needs 4.5:1
- *   white on #CB6CE6 (Accent Purple)  3.08:1   needs 4.5:1
- *   white on #303F9F (Indigo)         8.98:1   passes
+ *                    on #FFF   on #F5F7FA   on navy #14213D
+ *   #00A9E0 bright      2.71 ✗     2.52 ✗        5.90 ✓
+ *   #0078B4 deep        4.85 ✓     4.52 ✓        3.54 ✗
+ *   #CB6CE6 bright      3.08 ✗     2.87 ✗        5.19 ✓
+ *   #B52ADC deep        4.85 ✓     4.52 ✓        3.54 ✗
  *
- * Two ways out, both needing a decision rather than a patch:
- *   A. Keep the brand hexes exactly and use navy #14213D as the text on accent
- *      fills — 5.90:1 on blue, 5.19:1 on purple. Palette unchanged.
- *   B. Darken the accents for text use — #007fa8 and #b838dd clear 4.5:1 with
- *      white text, at the cost of duller brand colours.
+ * So: deep on light surfaces and inside filled buttons behind white text;
+ * bright for text and icons on the navy sections, where lightness is what
+ * creates the contrast. Reaching for the wrong one fails here.
  *
- * Remove test.fixme once the palette is settled; the assertion is ready.
+ * Two things worth knowing before picking a value:
+ *
+ * The deep blue is rotated 5° toward blue (200°, against the brand's 194.7°).
+ * Darkening alone made it read green, because green dominates at low lightness.
+ *
+ * Both deep values are set against #F5F7FA, not #FFFFFF. The site uses that
+ * grey for panels, and a value tuned only to white lands around 4.19 on it —
+ * passing on one light surface and failing on the other.
  */
 test.describe('colour contrast', () => {
   for (const route of ROUTES) {
-    test.fixme(`${route} meets AA contrast`, async ({ page }) => {
+    test(`${route} meets AA contrast`, async ({ page }) => {
       await page.goto(route, { waitUntil: 'networkidle' });
       await page.addScriptTag({ content: axeSource });
 

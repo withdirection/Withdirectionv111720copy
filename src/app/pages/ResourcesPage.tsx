@@ -216,7 +216,7 @@ export function ResourcesPage() {
                     </div>
                   </div>
                   <p className="text-gray-700 text-sm mb-4">{resource.description}</p>
-                  <div className="flex items-center gap-2 text-[#00A9E0] text-sm font-medium">
+                  <div className="flex items-center gap-2 text-[#0078B4] text-sm font-medium">
                     <span>Visit Website</span>
                     <ExternalLink size={16} />
                   </div>
@@ -299,7 +299,7 @@ export function ResourcesPage() {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-[#00A9E0] text-white px-8 py-4 rounded-md hover:bg-[#303F9F] transition-colors text-lg"
+            className="inline-flex items-center gap-2 bg-[#0078B4] text-white px-8 py-4 rounded-md hover:bg-[#303F9F] transition-colors text-lg"
           >
             <MessageSquare size={24} />
             Contact Us

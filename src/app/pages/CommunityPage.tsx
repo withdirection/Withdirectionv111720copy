@@ -33,8 +33,8 @@ export function CommunityPage() {
               Accessible events with sign language interpretation throughout Brooklyn and NYC
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <span className="bg-[#00A9E0] px-4 py-2 rounded-full text-sm">Deaf-Led Events</span>
-              <span className="bg-[#CB6CE6] px-4 py-2 rounded-full text-sm">Arts & Cultural Programs</span>
+              <span className="bg-[#0078B4] px-4 py-2 rounded-full text-sm">Deaf-Led Events</span>
+              <span className="bg-[#B52ADC] px-4 py-2 rounded-full text-sm">Arts & Cultural Programs</span>
               <span className="bg-[#303F9F] px-4 py-2 rounded-full text-sm">Community Announcements</span>
             </div>
           </div>
@@ -51,7 +51,7 @@ export function CommunityPage() {
             </div>
             <Link
               to="/contact"
-              className="flex items-center gap-2 bg-[#00A9E0] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+              className="flex items-center gap-2 bg-[#0078B4] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
             >
               <Plus size={20} />
               Submit Event
@@ -73,7 +73,7 @@ export function CommunityPage() {
                   aria-pressed={filter === key}
                   className={`px-4 py-2 rounded-md transition-colors ${
                     filter === key
-                      ? 'bg-[#00A9E0] text-white'
+                      ? 'bg-[#0078B4] text-white'
                       : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
                   }`}
                 >
@@ -126,11 +126,11 @@ export function CommunityPage() {
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-4">
                       {event.deafLed && (
-                        <span className="bg-[#00A9E0] text-white text-xs px-2 py-1 rounded">
+                        <span className="bg-[#0078B4] text-white text-xs px-2 py-1 rounded">
                           Deaf-Led
                         </span>
                       )}
-                      <span className="bg-[#CB6CE6] text-white text-xs px-2 py-1 rounded">
+                      <span className="bg-[#B52ADC] text-white text-xs px-2 py-1 rounded">
                         {event.type}
                       </span>
                     </div>
@@ -203,7 +203,7 @@ export function CommunityPage() {
                           {dayEvents.map((event) => (
                             <div
                               key={event.id}
-                              className="text-xs bg-[#00A9E0] text-white px-1 py-0.5 rounded truncate"
+                              className="text-xs bg-[#0078B4] text-white px-1 py-0.5 rounded truncate"
                               title={event.title}
                             >
                               {event.title}
@@ -227,7 +227,7 @@ export function CommunityPage() {
               </p>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-[#00A9E0] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+                className="inline-flex items-center gap-2 bg-[#0078B4] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
               >
                 <Plus size={20} />
                 Submit an Event

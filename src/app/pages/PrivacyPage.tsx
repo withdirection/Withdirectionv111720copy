@@ -99,12 +99,12 @@ export function PrivacyPage() {
               Write to{' '}
               <a
                 href="mailto:info@withdirection.net"
-                className="text-[#00A9E0] hover:underline"
+                className="text-[#0078B4] underline underline-offset-2 hover:no-underline"
               >
                 info@withdirection.net
               </a>{' '}
               and we will respond directly. You can also{' '}
-              <Link to="/contact" className="text-[#00A9E0] hover:underline">
+              <Link to="/contact" className="text-[#0078B4] underline underline-offset-2 hover:no-underline">
                 use our contact page
               </Link>
               .
