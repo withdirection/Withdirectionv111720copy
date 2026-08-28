@@ -398,7 +398,7 @@ export async function fetchPublicEventsMCP(): Promise<CommunityEvent[]> {
  *   - parent_database_id: "23f0f36a-53bf-4d16-9a4f-50688f41dd6a"
  *   - properties: buildEventSubmissionProperties(eventData)
  */
-export async function submitEventMCP(eventData: EventSubmission): Promise<{ success: boolean; pageId: string }> {
+export async function submitEventMCP(_eventData: EventSubmission): Promise<{ success: boolean; pageId: string }> {
   // This would be called via MCP in a Claude environment
   // The actual implementation uses the mcp__Notion__notion-create-pages tool
   throw new Error(

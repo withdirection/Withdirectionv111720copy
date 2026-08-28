@@ -306,10 +306,9 @@ export function SubmitEventModal({
                                   mode="single"
                                   selected={field.value}
                                   onSelect={field.onChange}
-                                  disabled={(date) =>
+                                  disabled={(date: Date) =>
                                     date < new Date(new Date().setHours(0, 0, 0, 0))
                                   }
-                                  initialFocus
                                 />
                               </PopoverContent>
                             </Popover>
@@ -715,7 +714,7 @@ export function SubmitEventModal({
                             <FormControl>
                               <Input
                                 type="tel"
-                                placeholder="(555) 123-4567"
+                                placeholder="Your phone number"
                                 className="bg-[#F5F7FA] border-[#E6E9EF] focus-visible:border-[#00A9E0]"
                                 {...field}
                               />

@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
-  CommunityEvent,
-  EventSubmission,
   fetchPublicEventsREST,
   submitEventREST,
 } from '../api/notionEvents';
+import type { CommunityEvent, EventSubmission } from '../api/notionEvents';
 
 interface UseNotionEventsResult {
   /** List of community events from Notion */

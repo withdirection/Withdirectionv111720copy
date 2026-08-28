@@ -1,8 +1,9 @@
-import { Calendar, MapPin, Clock, Users, Instagram, Plus, ExternalLink, List, CalendarDays, Loader2, AlertCircle } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Instagram, Plus, List, CalendarDays, Loader2, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useNotionEvents } from '../../hooks/useNotionEvents';
-import { SubmitEventModal, EventSubmission as ModalEventSubmission } from '../components/SubmitEventModal';
-import { EventSubmission as ApiEventSubmission } from '../../api/notionEvents';
+import { SubmitEventModal } from '../components/SubmitEventModal';
+import type { EventSubmission as ModalEventSubmission } from '../components/SubmitEventModal';
+import type { EventSubmission as ApiEventSubmission } from '../../api/notionEvents';
 import { format } from 'date-fns';
 import {
   FILTERS,
@@ -13,7 +14,7 @@ import {
 } from '../data/events';
 
 export function CommunityPage() {
-  const { events, loading, error, submitEvent, submitting } = useNotionEvents();
+  const { events, loading, error, submitEvent } = useNotionEvents();
   const [filter, setFilter] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list');
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
