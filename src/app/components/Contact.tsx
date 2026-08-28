@@ -1,6 +1,19 @@
 import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
+import { useState, type FormEvent } from 'react';
+import { SERVICE_OPTIONS } from '../data/services';
 
 export function Contact() {
+  const [submitted, setSubmitted] = useState(false);
+
+  // The form has no delivery backend yet. Without an explicit handler the browser
+  // performs a native GET to the current URL, which puts every named field —
+  // name, email, phone, message — into the query string, where it is captured by
+  // analytics as page_location and retained in browser history. Intercept it.
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitted(true);
+  };
+
   return (
     <section id="contact" className="py-20 bg-white relative overflow-hidden">
       {/* Background Pattern */}
@@ -46,7 +59,7 @@ export function Contact() {
                     <p className="text-sm text-gray-500 mb-1">Email</p>
                     <a
                       href="mailto:info@withdirection.net"
-                      className="text-lg text-[#00A9E0] hover:underline"
+                      className="text-lg text-[#0078B4] underline underline-offset-2 hover:no-underline"
                     >
                       info@withdirection.net
                     </a>
@@ -85,7 +98,7 @@ export function Contact() {
           {/* Contact Form */}
           <div className="bg-[#00A9E0]/10 p-8 rounded-lg border border-[#00A9E0]/30">
             <h3 className="text-2xl mb-6 text-[#14213D]">Send Us a Message</h3>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm mb-2 text-[#14213D]">
                   Name *
@@ -150,14 +163,11 @@ export function Contact() {
                   className="w-full px-4 py-3 border border-[#E6E9EF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A9E0] bg-white text-[#14213D]"
                 >
                   <option value="">Select a service</option>
-                  <option value="general-interpreting">General Interpreting Services</option>
-                  <option value="legal-interpreting">Legal Interpreting</option>
-                  <option value="multilingual-conference">Multilingual Conference Interpreting</option>
-                  <option value="consultation">Consultation</option>
-                  <option value="expert-services">Expert Services</option>
-                  <option value="tailored-training">Tailored Training</option>
-                  <option value="translation">Translation Services</option>
-                  <option value="other">Other</option>
+                  {SERVICE_OPTIONS.map(({ id, label }) => (
+                    <option key={id} value={id}>
+                      {label}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -189,14 +199,27 @@ export function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-[#00A9E0] text-white px-8 py-3 rounded-md hover:bg-[#14213D] transition-colors text-lg"
+                className="w-full bg-[#0078B4] text-white px-8 py-3 rounded-md hover:bg-[#14213D] transition-colors text-lg"
               >
                 Send Message
               </button>
 
-              <p className="text-sm text-gray-500 text-center">
-                We'll get back to you as soon as possible
-              </p>
+              {submitted ? (
+                <p
+                  role="status"
+                  className="text-sm text-center text-[#14213D] bg-white border border-[#00A9E0] rounded-md px-4 py-3"
+                >
+                  Online submission is not connected yet. Please email{' '}
+                  <a href="mailto:info@withdirection.net" className="text-[#00A9E0] underline">
+                    info@withdirection.net
+                  </a>{' '}
+                  and we will respond directly.
+                </p>
+              ) : (
+                <p className="text-sm text-gray-500 text-center">
+                  We'll get back to you as soon as possible
+                </p>
+              )}
             </form>
           </div>
         </div>

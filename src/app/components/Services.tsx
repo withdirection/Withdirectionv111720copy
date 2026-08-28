@@ -1,7 +1,6 @@
 import { MessageSquare, Globe, Briefcase, Award, GraduationCap, Calendar, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router';
 import remoteInterpretingImage from 'figma:asset/da07099dfc93f16634c5391070a86a8924c2795c.png';
-import gradientPattern from 'figma:asset/e15166bd80d22b048573bd472c6cbb5da8de4ad2.png';
 
 const services = [
   {
@@ -47,10 +46,17 @@ const services = [
 export function Services() {
   return (
     <section id="services" className="py-24 bg-white relative overflow-hidden">
-      {/* Background gradient pattern */}
-      <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
-        <img src={gradientPattern} alt="" className="w-full h-full object-cover" />
-      </div>
+      {/* Decorative background wash. The original Figma export referenced an image
+          asset that was never committed, which broke the production build; this is a
+          brand-palette stand-in. Swap back if the source asset is recovered. */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 right-0 w-1/3 h-full opacity-10"
+        style={{
+          backgroundImage:
+            'linear-gradient(160deg, #00A9E0 0%, #303F9F 45%, #CB6CE6 100%)',
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -75,7 +81,7 @@ export function Services() {
                 </div>
                 <h3 className="text-xl mb-3 text-[#14213D] group-hover:text-[#00A9E0] transition-colors">{service.title}</h3>
                 <p className="text-gray-600 mb-4">{service.description}</p>
-                <span className="inline-flex items-center gap-2 text-[#00A9E0] text-sm font-medium group-hover:gap-3 transition-all">
+                <span className="inline-flex items-center gap-2 text-[#0078B4] text-sm font-medium group-hover:gap-3 transition-all">
                   Learn More
                   <ArrowRight size={16} />
                 </span>
@@ -108,8 +114,8 @@ export function Services() {
                 Expert remote interpreting services delivered through secure, professional platforms. WITHdirection coordinates skilled interpreters for virtual meetings, conferences, and digital events with the same strategic planning and intentional coordination as our on-site services.
               </p>
               <Link
-                to="/services#remote"
-                className="inline-flex items-center gap-2 bg-[#00A9E0] text-white px-6 py-3 rounded-lg hover:bg-[#0090c0] transition-colors"
+                to="/contact"
+                className="inline-flex items-center gap-2 bg-[#0078B4] text-white px-6 py-3 rounded-lg hover:bg-[#0090c0] transition-colors"
               >
                 Book a Team of Interpreters Today
                 <ArrowRight size={20} />

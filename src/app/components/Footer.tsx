@@ -89,7 +89,20 @@ export function Footer() {
         <div className="border-t border-[#303F9F] pt-8 text-center text-gray-300">
           <p>© {currentYear} WITHdirection. All rights reserved.</p>
           <p className="mt-2 text-sm">
-            Empowering Deaf professionals through tailored communication services
+            Deaf-led interpreting, training, and accessibility consulting
+          </p>
+          <p className="mt-4 text-sm">
+            <Link to="/privacy" className="hover:text-[#00A9E0] transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="mx-2 text-gray-500" aria-hidden="true">·</span>
+            <button
+              type="button"
+              onClick={() => window.__wdConsent?.withdraw()}
+              className="hover:text-[#00A9E0] transition-colors underline-offset-4 hover:underline"
+            >
+              Cookie settings
+            </button>
           </p>
           <p className="mt-4 text-xs text-gray-400">
             Image Credits: UN Photo, Unsplash contributors. Stock images used for illustrative purposes.

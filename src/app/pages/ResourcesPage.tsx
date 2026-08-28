@@ -1,5 +1,6 @@
 import { Book, HelpCircle, ExternalLink, Users, Globe, MessageSquare, Award, FileText } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router';
 
 const faqs = [
   {
@@ -215,7 +216,7 @@ export function ResourcesPage() {
                     </div>
                   </div>
                   <p className="text-gray-700 text-sm mb-4">{resource.description}</p>
-                  <div className="flex items-center gap-2 text-[#00A9E0] text-sm font-medium">
+                  <div className="flex items-center gap-2 text-[#0078B4] text-sm font-medium">
                     <span>Visit Website</span>
                     <ExternalLink size={16} />
                   </div>
@@ -296,13 +297,13 @@ export function ResourcesPage() {
           <p className="text-xl text-gray-300 mb-8">
             We're here to help! Contact us for personalized guidance and consultation.
           </p>
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-[#00A9E0] text-white px-8 py-4 rounded-md hover:bg-[#303F9F] transition-colors text-lg"
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 bg-[#0078B4] text-white px-8 py-4 rounded-md hover:bg-[#303F9F] transition-colors text-lg"
           >
             <MessageSquare size={24} />
             Contact Us
-          </a>
+          </Link>
         </div>
       </section>
     </div>

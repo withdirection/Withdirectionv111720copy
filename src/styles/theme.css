@@ -192,3 +192,32 @@
     line-height: 1.5;
   }
 }
+/**
+ * Respect a reduced-motion preference.
+ *
+ * The site leans on transform, scale and transition throughout — hover scaling
+ * on nearly every button, a page-load slide on the header, animated underlines
+ * across the navigation. None of it was previously conditional, which is a
+ * problem for anyone who gets motion sickness or migraine from movement.
+ *
+ * Durations are collapsed rather than removed, so state changes still register
+ * as changes without any perceptible travel.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Hover and load transforms are decorative; drop the travel entirely. */
+  .transform,
+  [class*='hover:scale-'],
+  [class*='hover:translate-'],
+  [class*='group-hover:scale-'] {
+    transform: none !important;
+  }
+}

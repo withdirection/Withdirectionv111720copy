@@ -1,4 +1,4 @@
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Link } from 'react-router';
 import heroImage from 'figma:asset/997858107b29732b0dd439fdefc60f1ddbf7458c.png';
 
 export function Hero() {
@@ -30,18 +30,18 @@ export function Hero() {
             Expert sign language interpreting and strategic accessibility consulting. Deaf-led, research-informed, and built for institutional settings.
           </p>
           <div className="flex flex-col gap-4">
-            <a 
-              href="/consultation" 
-              className="inline-block bg-[#00A9E0] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-all text-base transform hover:scale-105 shadow-lg hover:shadow-xl w-fit"
+            <Link
+              to="/contact"
+              className="inline-block bg-[#0078B4] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-all text-base transform hover:scale-105 shadow-lg hover:shadow-xl w-fit"
             >
               Request Consultation
-            </a>
-            <a 
-              href="/contact" 
+            </Link>
+            <Link
+              to="/contact"
               className="text-white/70 hover:text-white transition-all text-sm underline underline-offset-4"
             >
               Contact Us
-            </a>
+            </Link>
           </div>
         </div>
       </div>

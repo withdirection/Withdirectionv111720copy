@@ -1,0 +1,4 @@
+# Single-page app fallback (Netlify, Cloudflare Pages).
+# createBrowserRouter uses real History API paths, so a direct hit or refresh on
+# /about, /services etc. must be served index.html rather than 404ing at the host.
+/*  /index.html  200

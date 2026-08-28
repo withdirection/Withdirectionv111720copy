@@ -1,5 +1,6 @@
 import { LogIn, UserPlus, Briefcase, Users, FileText, Calendar, MessageSquare, Shield } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router';
 
 export function PortalPage() {
   const [activeTab, setActiveTab] = useState<'client' | 'interpreter'>('client');
@@ -28,7 +29,7 @@ export function PortalPage() {
               onClick={() => setActiveTab('client')}
               className={`flex-1 py-4 px-6 rounded-lg transition-all ${
                 activeTab === 'client'
-                  ? 'bg-[#00A9E0] text-white'
+                  ? 'bg-[#0078B4] text-white'
                   : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
               }`}
             >
@@ -39,7 +40,7 @@ export function PortalPage() {
               onClick={() => setActiveTab('interpreter')}
               className={`flex-1 py-4 px-6 rounded-lg transition-all ${
                 activeTab === 'interpreter'
-                  ? 'bg-[#00A9E0] text-white'
+                  ? 'bg-[#0078B4] text-white'
                   : 'bg-[#F5F7FA] text-[#14213D] hover:bg-[#E6E9EF]'
               }`}
             >
@@ -64,44 +65,21 @@ export function PortalPage() {
                   <h2 className="text-2xl text-[#14213D]">Existing Clients</h2>
                 </div>
                 <p className="text-gray-700 mb-6">
-                  Access your account to manage bookings, view invoices, and communicate with our team.
+                  Manage bookings, view invoices, and communicate with our team.
                 </p>
-                <form className="space-y-4">
-                  <div>
-                    <label htmlFor="client-email" className="block text-sm text-gray-700 mb-2">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="client-email"
-                      className="w-full px-4 py-3 border border-[#E6E9EF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A9E0]"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="client-password" className="block text-sm text-gray-700 mb-2">
-                      Password
-                    </label>
-                    <input
-                      type="password"
-                      id="client-password"
-                      className="w-full px-4 py-3 border border-[#E6E9EF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A9E0]"
-                      placeholder="••••••••"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-[#00A9E0] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+                <div className="bg-white border border-[#E6E9EF] rounded-md p-5">
+                  <p className="text-[#14213D] mb-2 font-semibold">Sign-in is not available yet</p>
+                  <p className="text-gray-700 text-sm mb-4 leading-relaxed">
+                    The client portal is still being built. Until it opens, contact us
+                    directly and we will handle your request personally.
+                  </p>
+                  <Link
+                    to="/contact"
+                    className="inline-block w-full text-center bg-[#0078B4] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors"
                   >
-                    Sign In
-                  </button>
-                  <button
-                    type="button"
-                    className="w-full text-[#303F9F] text-sm hover:underline"
-                  >
-                    Forgot Password?
-                  </button>
-                </form>
+                    Contact Us
+                  </Link>
+                </div>
               </div>
 
               {/* New Client Card */}
@@ -133,9 +111,12 @@ export function PortalPage() {
                     <span className="text-gray-700">Secure, confidential document sharing</span>
                   </div>
                 </div>
-                <button className="w-full bg-[#CB6CE6] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors">
-                  Create Account
-                </button>
+                <Link
+                  to="/contact"
+                  className="block w-full text-center bg-[#B52ADC] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+                >
+                  Get Started
+                </Link>
               </div>
             </div>
 
@@ -181,44 +162,21 @@ export function PortalPage() {
                   <h2 className="text-2xl text-[#14213D]">Current Interpreters</h2>
                 </div>
                 <p className="text-gray-700 mb-6">
-                  Access your interpreter dashboard to view assignments, submit timesheets, and more.
+                  View assignments, submit timesheets, and access event materials.
                 </p>
-                <form className="space-y-4">
-                  <div>
-                    <label htmlFor="interpreter-email" className="block text-sm text-gray-700 mb-2">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="interpreter-email"
-                      className="w-full px-4 py-3 border border-[#E6E9EF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A9E0]"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="interpreter-password" className="block text-sm text-gray-700 mb-2">
-                      Password
-                    </label>
-                    <input
-                      type="password"
-                      id="interpreter-password"
-                      className="w-full px-4 py-3 border border-[#E6E9EF] rounded-md focus:outline-none focus:ring-2 focus:ring-[#00A9E0]"
-                      placeholder="••••••••"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-[#00A9E0] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+                <div className="bg-white border border-[#E6E9EF] rounded-md p-5">
+                  <p className="text-[#14213D] mb-2 font-semibold">Sign-in is not available yet</p>
+                  <p className="text-gray-700 text-sm mb-4 leading-relaxed">
+                    The interpreter portal is still being built. Until it opens, contact us
+                    directly and we will handle your request personally.
+                  </p>
+                  <Link
+                    to="/contact"
+                    className="inline-block w-full text-center bg-[#0078B4] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors"
                   >
-                    Sign In
-                  </button>
-                  <button
-                    type="button"
-                    className="w-full text-[#303F9F] text-sm hover:underline"
-                  >
-                    Forgot Password?
-                  </button>
-                </form>
+                    Contact Us
+                  </Link>
+                </div>
               </div>
 
               {/* Join Our Team Card */}
@@ -251,9 +209,12 @@ export function PortalPage() {
                     <span className="text-gray-700">Professional development opportunities</span>
                   </div>
                 </div>
-                <button className="w-full bg-[#CB6CE6] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors mb-3">
+                <Link
+                  to="/contact"
+                  className="block w-full text-center bg-[#B52ADC] text-white py-3 rounded-md hover:bg-[#303F9F] transition-colors mb-3"
+                >
                   Apply to Join
-                </button>
+                </Link>
                 <p className="text-sm text-gray-600 text-center">
                   Requirements: Valid certification, 2+ years experience
                 </p>
@@ -298,7 +259,7 @@ export function PortalPage() {
               <p className="text-gray-700 text-sm">
                 All portal access is encrypted and secure. We take your privacy seriously and never 
                 share your information with third parties. For support with portal access, contact us 
-                at <a href="mailto:support@withdirection.net" className="text-[#00A9E0] hover:underline">support@withdirection.net</a>
+                at <a href="mailto:support@withdirection.net" className="text-[#0078B4] underline underline-offset-2 hover:no-underline">support@withdirection.net</a>
               </p>
             </div>
           </div>
