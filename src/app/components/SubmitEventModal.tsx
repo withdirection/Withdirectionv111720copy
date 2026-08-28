@@ -544,7 +544,7 @@ export function SubmitEventModal({
                         name="registrationLink"
                         rules={{
                           pattern: {
-                            value: /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
+                            value: /^(https?:\/\/)?[\w.-]+\.[a-z]{2,63}(\/\S*)?$/i,
                             message: "Please enter a valid URL",
                           },
                         }}
@@ -572,7 +572,7 @@ export function SubmitEventModal({
                         name="website"
                         rules={{
                           pattern: {
-                            value: /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
+                            value: /^(https?:\/\/)?[\w.-]+\.[a-z]{2,63}(\/\S*)?$/i,
                             message: "Please enter a valid URL",
                           },
                         }}
