@@ -194,7 +194,7 @@ export function SubmitEventModal({
             </DialogHeader>
             <Button
               onClick={handleClose}
-              className="bg-[#00A9E0] hover:bg-[#303F9F] text-white"
+              className="bg-[#0078B4] hover:bg-[#303F9F] text-white"
             >
               Close
             </Button>
@@ -881,7 +881,7 @@ export function SubmitEventModal({
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="bg-[#00A9E0] hover:bg-[#303F9F] text-white min-w-32"
+                      className="bg-[#0078B4] hover:bg-[#303F9F] text-white min-w-32"
                     >
                       {isSubmitting ? (
                         <>

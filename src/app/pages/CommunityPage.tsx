@@ -78,7 +78,7 @@ export function CommunityPage() {
             </div>
             <button
               onClick={() => setIsSubmitModalOpen(true)}
-              className="flex items-center gap-2 bg-[#00A9E0] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+              className="flex items-center gap-2 bg-[#0078B4] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
             >
               <Plus size={20} />
               Submit Event
