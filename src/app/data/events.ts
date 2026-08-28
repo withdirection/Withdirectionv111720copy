@@ -22,14 +22,14 @@ export type EventType =
   | 'Performance';
 
 export interface CommunityEvent {
-  id: number;
+  id: number | string;
   title: string;
   organization: string;
   /** ISO date, YYYY-MM-DD. */
   date: string;
   time: string;
   location: string;
-  type: EventType;
+  type: string;
   description: string;
   accessible: boolean;
   deafLed: boolean;
@@ -145,7 +145,7 @@ export type FilterKey = (typeof FILTERS)[number]['key'];
 
 /** Types the 'arts' filter covers. Previously a substring match, which meant a
  *  new type containing the word "Museum" would silently join this bucket. */
-const ARTS_TYPES: readonly EventType[] = ['Arts & Culture', 'Museum Access', 'Performance'];
+const ARTS_TYPES: readonly string[] = ['Arts & Culture', 'Museum Access', 'Performance'];
 
 export function filterEvents(list: readonly CommunityEvent[], filter: string): CommunityEvent[] {
   switch (filter) {

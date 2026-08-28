@@ -1,24 +1,51 @@
-import { Calendar, MapPin, Clock, Users, Instagram, Plus, List, CalendarDays } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Instagram, Plus, List, CalendarDays, Loader2, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
+import { useNotionEvents } from '../../hooks/useNotionEvents';
+import { SubmitEventModal } from '../components/SubmitEventModal';
+import type { EventSubmission as ModalEventSubmission } from '../components/SubmitEventModal';
+import type { EventSubmission as ApiEventSubmission } from '../../api/notionEvents';
+import { format } from 'date-fns';
 import {
   FILTERS,
   calendarMonths,
-  events,
   filterEvents,
   formatEventDate,
   upcomingEvents,
 } from '../data/events';
-import { Link } from 'react-router';
 
 export function CommunityPage() {
+  const { events, loading, error, submitEvent } = useNotionEvents();
   const [filter, setFilter] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list');
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
 
   // Only ever advertise events that have not happened yet. The list is static
   // placeholder data today, so this legitimately renders empty.
   const filteredEvents = filterEvents(upcomingEvents(events), filter);
   const months = calendarMonths(filteredEvents);
 
+  // Adapter function to convert modal's EventSubmission to API's EventSubmission
+  const handleSubmitEvent = async (modalData: ModalEventSubmission): Promise<void> => {
+    const apiData: ApiEventSubmission = {
+      title: modalData.eventTitle,
+      organization: modalData.hostOrganization,
+      date: format(modalData.eventDate, 'yyyy-MM-dd'),
+      startTime: modalData.startTime,
+      endTime: modalData.endTime,
+      location: modalData.format === 'Virtual' ? (modalData.platform || 'Virtual') : (modalData.location || ''),
+      type: modalData.eventType,
+      description: modalData.eventDescription,
+      accessTypes: [modalData.accessType],
+      format: modalData.format === 'In person' ? 'In-Person' : modalData.format === 'Hybrid' ? 'Hybrid' : 'Virtual',
+      contactEmail: modalData.submitterEmail,
+      contactName: modalData.submitterName,
+    };
+
+    const result = await submitEvent(apiData);
+    if (!result.success) {
+      throw new Error(result.error || 'Failed to submit event');
+    }
+  };
 
   return (
     <div className="pt-20">
@@ -49,13 +76,13 @@ export function CommunityPage() {
               <h2 className="text-xl text-[#14213D] mb-2">Have an accessible event to share?</h2>
               <p className="text-gray-600">Submit your event for inclusion in our community calendar</p>
             </div>
-            <Link
-              to="/contact"
+            <button
+              onClick={() => setIsSubmitModalOpen(true)}
               className="flex items-center gap-2 bg-[#0078B4] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
             >
               <Plus size={20} />
               Submit Event
-            </Link>
+            </button>
           </div>
         </div>
       </section>
@@ -114,8 +141,38 @@ export function CommunityPage() {
       {/* Events List */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Loading State */}
+          {loading && (
+            <div className="flex flex-col items-center justify-center py-16">
+              <Loader2 className="w-12 h-12 text-[#00A9E0] animate-spin mb-4" />
+              <p className="text-gray-600">Loading events...</p>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && !loading && (
+            <div className="flex flex-col items-center justify-center py-16">
+              <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
+              <p className="text-red-600 mb-2">Failed to load events</p>
+              <p className="text-gray-500 text-sm">{error}</p>
+            </div>
+          )}
+
+          {/* Empty State */}
+          {!loading && !error && filteredEvents.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-16">
+              <Calendar className="w-12 h-12 text-gray-400 mb-4" />
+              <p className="text-gray-600 mb-2">No events found</p>
+              <p className="text-gray-500 text-sm">
+                {filter === 'all'
+                  ? 'Check back soon for upcoming events!'
+                  : 'Try selecting a different filter or check back later.'}
+              </p>
+            </div>
+          )}
+
           {/* List View */}
-          {viewMode === 'list' && (
+          {!loading && !error && viewMode === 'list' && filteredEvents.length > 0 && (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredEvents.map((event) => (
                 <div
@@ -138,7 +195,7 @@ export function CommunityPage() {
                     {/* Event Info */}
                     <h3 className="text-xl text-[#14213D] mb-2">{event.title}</h3>
                     <p className="text-sm text-[#303F9F] mb-4">{event.organization}</p>
-                    
+
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center gap-2 text-gray-600 text-sm">
                         <Calendar size={16} />
@@ -164,7 +221,7 @@ export function CommunityPage() {
           )}
 
           {/* Calendar View */}
-          {viewMode === 'calendar' && (
+          {!loading && !error && viewMode === 'calendar' && filteredEvents.length > 0 && (
             <div className="space-y-10">
               {months.map((month) => (
                 <div
@@ -217,23 +274,6 @@ export function CommunityPage() {
               ))}
             </div>
           )}
-
-          {filteredEvents.length === 0 && (
-            <div className="text-center py-16">
-              <h3 className="text-2xl text-[#14213D] mb-3">No upcoming events right now</h3>
-              <p className="text-gray-600 max-w-xl mx-auto mb-6">
-                We publish accessible events as they are confirmed. Follow us on Instagram
-                for announcements, or tell us about an event you are running.
-              </p>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 bg-[#0078B4] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
-              >
-                <Plus size={20} />
-                Submit an Event
-              </Link>
-            </div>
-          )}
         </div>
       </section>
 
@@ -274,7 +314,7 @@ export function CommunityPage() {
               ))}
             </div>
             <p className="text-center text-gray-300 mt-6 text-sm">
-              Instagram feed integration • Connect your Instagram account to display recent posts
+              Instagram feed integration - Connect your Instagram account to display recent posts
             </p>
           </div>
         </div>
@@ -310,6 +350,13 @@ export function CommunityPage() {
           </div>
         </div>
       </section>
+
+      {/* Submit Event Modal */}
+      <SubmitEventModal
+        open={isSubmitModalOpen}
+        onOpenChange={setIsSubmitModalOpen}
+        onSubmit={handleSubmitEvent}
+      />
     </div>
   );
 }
