@@ -1,113 +1,49 @@
-import { Calendar, MapPin, Clock, Users, Instagram, Plus, ExternalLink, List, CalendarDays } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Instagram, Plus, ExternalLink, List, CalendarDays, Loader2, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
-
-// Mock events data - in production, this would come from a CMS or database
-const upcomingEvents = [
-  {
-    id: 1,
-    title: 'ASL Tour: Contemporary Art Exhibition',
-    organization: 'Whitney Museum of American Art',
-    date: 'March 15, 2026',
-    time: '2:00 PM - 3:30 PM',
-    location: 'Whitney Museum, Manhattan',
-    type: 'Museum Access',
-    description: 'Join us for an ASL-interpreted tour of the latest contemporary art exhibition.',
-    accessible: true,
-    deafLed: false,
-    virtual: false,
-  },
-  {
-    id: 2,
-    title: 'Deaf Artists Showcase',
-    organization: 'Brooklyn Museum',
-    date: 'March 22, 2026',
-    time: '6:00 PM - 8:00 PM',
-    location: 'Brooklyn Museum, Brooklyn',
-    type: 'Arts & Culture',
-    description: 'A Deaf-led celebration of visual arts featuring local Deaf artists.',
-    accessible: true,
-    deafLed: true,
-    virtual: false,
-  },
-  {
-    id: 3,
-    title: 'Drawing Workshop with ASL Interpretation',
-    organization: 'The Drawing Center',
-    date: 'March 28, 2026',
-    time: '1:00 PM - 4:00 PM',
-    location: 'The Drawing Center, SoHo',
-    type: 'Workshop',
-    description: 'Hands-on drawing workshop with professional ASL interpretation provided.',
-    accessible: true,
-    deafLed: false,
-    virtual: false,
-  },
-  {
-    id: 4,
-    title: 'Community Sign Language Social',
-    organization: 'Brooklyn Public Library',
-    date: 'April 5, 2026',
-    time: '7:00 PM - 9:00 PM',
-    location: 'Brooklyn Public Library, Central Branch',
-    type: 'Community Event',
-    description: 'Open social event for ASL learners and the Deaf community to connect.',
-    accessible: true,
-    deafLed: true,
-    virtual: false,
-  },
-  {
-    id: 5,
-    title: 'Accessible Theatre Performance: Spring Awakening',
-    organization: 'Signature Theatre',
-    date: 'April 12, 2026',
-    time: '7:30 PM',
-    location: 'Signature Theatre, Manhattan',
-    type: 'Performance',
-    description: 'ASL-interpreted performance with Deaf and hearing actors.',
-    accessible: true,
-    deafLed: false,
-    virtual: false,
-  },
-  {
-    id: 6,
-    title: 'Virtual ASL Coffee Chat',
-    organization: 'WITHdirection',
-    date: 'March 25, 2026',
-    time: '10:00 AM - 11:00 AM',
-    location: 'Virtual (Zoom)',
-    type: 'Community Event',
-    description: 'Join us online for a casual conversation in ASL. Perfect for practicing and connecting with others.',
-    accessible: true,
-    deafLed: true,
-    virtual: true,
-  },
-  {
-    id: 7,
-    title: 'Online Workshop: Deaf Culture 101',
-    organization: 'WITHdirection',
-    date: 'April 2, 2026',
-    time: '6:00 PM - 7:30 PM',
-    location: 'Virtual (Zoom)',
-    type: 'Workshop',
-    description: 'Learn about Deaf culture, etiquette, and community values in this interactive online session.',
-    accessible: true,
-    deafLed: true,
-    virtual: true,
-  },
-];
+import { useNotionEvents } from '../../hooks/useNotionEvents';
+import { SubmitEventModal, EventSubmission as ModalEventSubmission } from '../components/SubmitEventModal';
+import { EventSubmission as ApiEventSubmission } from '../../api/notionEvents';
+import { format } from 'date-fns';
 
 export function CommunityPage() {
+  const { events, loading, error, submitEvent, submitting } = useNotionEvents();
   const [filter, setFilter] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list');
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
 
-  const filteredEvents = filter === 'all' 
-    ? upcomingEvents 
-    : upcomingEvents.filter(event => {
+  const filteredEvents = filter === 'all'
+    ? events
+    : events.filter(event => {
         if (filter === 'deaf-led') return event.deafLed;
         if (filter === 'virtual') return event.virtual;
-        if (filter === 'arts') return event.type.includes('Arts') || event.type.includes('Museum') || event.type.includes('Performance');
-        return event.type === filter;
+        if (filter === 'arts') return event.type.includes('Arts') || event.type.includes('Museum') || event.type.includes('Performance') || event.type.includes('Art Tour');
+        if (filter === 'workshops') return event.type === 'Workshop' || event.type === 'Educational';
+        if (filter === 'community') return event.type === 'Community Event';
+        return true;
       });
+
+  // Adapter function to convert modal's EventSubmission to API's EventSubmission
+  const handleSubmitEvent = async (modalData: ModalEventSubmission): Promise<void> => {
+    const apiData: ApiEventSubmission = {
+      title: modalData.eventTitle,
+      organization: modalData.hostOrganization,
+      date: format(modalData.eventDate, 'yyyy-MM-dd'),
+      startTime: modalData.startTime,
+      endTime: modalData.endTime,
+      location: modalData.format === 'Virtual' ? (modalData.platform || 'Virtual') : (modalData.location || ''),
+      type: modalData.eventType,
+      description: modalData.eventDescription,
+      accessTypes: [modalData.accessType],
+      format: modalData.format === 'In person' ? 'In-Person' : modalData.format === 'Hybrid' ? 'Hybrid' : 'Virtual',
+      contactEmail: modalData.submitterEmail,
+      contactName: modalData.submitterName,
+    };
+
+    const result = await submitEvent(apiData);
+    if (!result.success) {
+      throw new Error(result.error || 'Failed to submit event');
+    }
+  };
 
   return (
     <div className="pt-20">
@@ -138,7 +74,10 @@ export function CommunityPage() {
               <h3 className="text-xl text-[#14213D] mb-2">Have an accessible event to share?</h3>
               <p className="text-gray-600">Submit your event for inclusion in our community calendar</p>
             </div>
-            <button className="flex items-center gap-2 bg-[#00A9E0] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors">
+            <button
+              onClick={() => setIsSubmitModalOpen(true)}
+              className="flex items-center gap-2 bg-[#00A9E0] text-white px-6 py-3 rounded-md hover:bg-[#303F9F] transition-colors"
+            >
               <Plus size={20} />
               Submit Event
             </button>
@@ -246,8 +185,38 @@ export function CommunityPage() {
       {/* Events List */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Loading State */}
+          {loading && (
+            <div className="flex flex-col items-center justify-center py-16">
+              <Loader2 className="w-12 h-12 text-[#00A9E0] animate-spin mb-4" />
+              <p className="text-gray-600">Loading events...</p>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && !loading && (
+            <div className="flex flex-col items-center justify-center py-16">
+              <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
+              <p className="text-red-600 mb-2">Failed to load events</p>
+              <p className="text-gray-500 text-sm">{error}</p>
+            </div>
+          )}
+
+          {/* Empty State */}
+          {!loading && !error && filteredEvents.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-16">
+              <Calendar className="w-12 h-12 text-gray-400 mb-4" />
+              <p className="text-gray-600 mb-2">No events found</p>
+              <p className="text-gray-500 text-sm">
+                {filter === 'all'
+                  ? 'Check back soon for upcoming events!'
+                  : 'Try selecting a different filter or check back later.'}
+              </p>
+            </div>
+          )}
+
           {/* List View */}
-          {viewMode === 'list' && (
+          {!loading && !error && viewMode === 'list' && filteredEvents.length > 0 && (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredEvents.map((event) => (
                 <div
@@ -301,7 +270,7 @@ export function CommunityPage() {
           )}
 
           {/* Calendar View */}
-          {viewMode === 'calendar' && (
+          {!loading && !error && viewMode === 'calendar' && filteredEvents.length > 0 && (
             <div className="bg-white rounded-lg border border-[#E6E9EF] p-8">
               <div className="text-center mb-8">
                 <h3 className="text-2xl text-[#14213D] mb-2">March - April 2026</h3>
@@ -487,6 +456,13 @@ export function CommunityPage() {
           </div>
         </div>
       </section>
+
+      {/* Submit Event Modal */}
+      <SubmitEventModal
+        open={isSubmitModalOpen}
+        onOpenChange={setIsSubmitModalOpen}
+        onSubmit={handleSubmitEvent}
+      />
     </div>
   );
 }
