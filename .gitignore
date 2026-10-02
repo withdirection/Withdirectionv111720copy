@@ -1,13 +1,40 @@
+# Dependencies
 node_modules/
+
+# Build outputs
 dist/
+build/
+.next/
+
+# Test outputs
 coverage/
 test-results/
 playwright-report/
 
-*.local
+# Environment files
 .env
+.env.local
+.env.*.local
 .env.*
 !.env.example
 
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 *.log
+
+# Cache
+.cache/
+.turbo/
